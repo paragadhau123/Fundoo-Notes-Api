@@ -28,7 +28,7 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public IActionResult Post(EmployeeDetails emp)
         {
-            bool result = this.businessLayer.SamplePost(emp);
+            bool result = this.businessLayer.AddEmployee(emp);
 
             if (result == true)
                 return this.Ok(new { sucess = true, message = "record added" });

@@ -23,9 +23,9 @@ namespace BusinessLayer.Service
             return this.repositoryLayer.GetEmployeeDetails();
         }
 
-        public bool SamplePost(EmployeeDetails emp)
+        public bool AddEmployee(EmployeeDetails emp)
         {
-            return this.repositoryLayer.SamplePost(emp);
+            return this.repositoryLayer.AddEmployee(emp);
         }
     }
 }

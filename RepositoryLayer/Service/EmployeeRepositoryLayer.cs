@@ -22,7 +22,7 @@ namespace RepositoryLayer.Service
            return  this._Employee.Find(book => true).ToList();
         }
 
-        public bool SamplePost(EmployeeDetails emp)
+        public bool AddEmployee(EmployeeDetails emp)
         {
            
                 try

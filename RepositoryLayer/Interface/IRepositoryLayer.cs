@@ -8,6 +8,6 @@ namespace RepositoryLayer.Interface
    public interface IRepositoryLayer
     {
         List<Employee> GetEmployeeDetails();
-        bool SamplePost(EmployeeDetails emp);
+        bool AddEmployee(EmployeeDetails emp);
     }
 }

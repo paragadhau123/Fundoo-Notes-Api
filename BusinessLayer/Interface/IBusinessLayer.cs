@@ -11,7 +11,7 @@ namespace BusinessLayer.Interface
        
         List<Employee> GetEmployeeDetails();
 
-       public bool SamplePost(EmployeeDetails emp);
+       public bool AddEmployee(EmployeeDetails emp);
 
     }
 }
