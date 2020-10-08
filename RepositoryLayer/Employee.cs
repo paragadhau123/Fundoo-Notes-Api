@@ -9,14 +9,14 @@ namespace RepositoryLayer
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+       
+        public string EmployeeFirstName { get; set; }
 
-        [BsonElement("Name")]
-        public string BookName { get; set; }
+        public string EmployeeLastName { get; set; }
 
-        public decimal Price { get; set; }
+        public string Email { get; set; }
 
-        public string Category { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public string Author { get; set; }
     }
 }

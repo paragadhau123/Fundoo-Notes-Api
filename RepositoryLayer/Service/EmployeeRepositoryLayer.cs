@@ -29,10 +29,10 @@ namespace RepositoryLayer.Service
                 {
                     Employee newEmployee = new Employee()
                     {
-                        BookName = emp.BookName,
-                        Price = emp.Price,
-                        Category = emp.Category,
-                        Author = emp.Author
+                        EmployeeFirstName = emp.EmployeeFirstName,
+                        EmployeeLastName = emp.EmployeeLastName,
+                        Email = emp.Email,
+                        PhoneNumber = emp.PhoneNumber
                     };
                     _Employee.InsertOne(newEmployee);
                     return true;

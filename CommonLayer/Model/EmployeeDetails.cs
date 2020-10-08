@@ -6,14 +6,15 @@ namespace CommonLayer.Model
 {
   public  class EmployeeDetails
     {
-      
-        public string BookName { get; set; }
 
-        public decimal Price { get; set; }
+        public string EmployeeFirstName { get; set; }
 
-        public string Category { get; set; }
+        public string EmployeeLastName { get; set; }
 
-        public string Author { get; set; }
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+
     }
 }
 
