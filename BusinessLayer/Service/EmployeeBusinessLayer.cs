@@ -27,5 +27,10 @@ namespace BusinessLayer.Service
         {
             return this.repositoryLayer.AddEmployee(emp);
         }
+
+        public bool deleteEmployeeById(string id)
+        {
+            return this.repositoryLayer.deleteEmployeeById(id);
+        }
     }
 }

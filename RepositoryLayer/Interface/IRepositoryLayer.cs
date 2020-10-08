@@ -9,5 +9,7 @@ namespace RepositoryLayer.Interface
     {
         List<Employee> GetEmployeeDetails();
         bool AddEmployee(EmployeeDetails emp);
+
+        public bool deleteEmployeeById(string id);
     }
 }

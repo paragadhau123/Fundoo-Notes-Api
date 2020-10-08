@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using BusinessLayer.Interface;
 using CommonLayer.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +32,18 @@ namespace EmployeeManagement.Controllers
             else
                 return this.BadRequest(new { sucess = false, message = "record not added" });
         }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult delete(string id)
+
+        {
+            bool result = this.businessLayer.deleteEmployeeById(id);
+
+            if (result == true)
+                return this.Ok(new { sucess = true, message = "record deleted" });
+            else
+                return this.BadRequest(new { sucess = false, message = "record not deleted" });
+        }
+
     }
 }

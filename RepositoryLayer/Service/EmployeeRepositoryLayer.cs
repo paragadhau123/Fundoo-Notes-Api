@@ -42,6 +42,20 @@ namespace RepositoryLayer.Service
                     return false;
                 }
             }
+
+        public bool deleteEmployeeById(string id)
+        {
+            try
+            {
+
+                _Employee.DeleteOne(employee => employee.Id == id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
+    }
     }
 
