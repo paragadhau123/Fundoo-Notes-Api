@@ -17,7 +17,7 @@ namespace RepositoryLayer.Service
             var database = client.GetDatabase(settings.DatabaseName);
             _Employee = database.GetCollection<Employee>(settings.EmployeeCollectionName);
         }
-        public List<Employee> SampleGet()
+        public List<Employee> GetEmployeeDetails()
         {
            return  this._Employee.Find(book => true).ToList();
         }

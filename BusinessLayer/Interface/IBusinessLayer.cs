@@ -9,7 +9,7 @@ namespace BusinessLayer.Interface
     public interface IBusinessLayer
     {
        
-        List<Employee> SampleGet();
+        List<Employee> GetEmployeeDetails();
 
        public bool SamplePost(EmployeeDetails emp);
 

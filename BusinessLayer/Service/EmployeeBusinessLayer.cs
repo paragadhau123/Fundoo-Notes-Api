@@ -18,9 +18,9 @@ namespace BusinessLayer.Service
             this.repositoryLayer = repositoryLayer;
         }
 
-        public List<Employee> SampleGet()
+        public List<Employee> GetEmployeeDetails()
         {
-            return this.repositoryLayer.SampleGet();
+            return this.repositoryLayer.GetEmployeeDetails();
         }
 
         public bool SamplePost(EmployeeDetails emp)

@@ -21,7 +21,7 @@ namespace EmployeeManagement.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-           var result = businessLayer.SampleGet();
+           var result = businessLayer.GetEmployeeDetails();
             return this.Ok(new { sucess = true, data = result });
         }
 

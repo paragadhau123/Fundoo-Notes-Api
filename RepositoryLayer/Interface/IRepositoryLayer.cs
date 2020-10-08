@@ -7,7 +7,7 @@ namespace RepositoryLayer.Interface
 {
    public interface IRepositoryLayer
     {
-        List<Employee> SampleGet();
+        List<Employee> GetEmployeeDetails();
         bool SamplePost(EmployeeDetails emp);
     }
 }
