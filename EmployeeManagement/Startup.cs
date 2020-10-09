@@ -23,7 +23,7 @@ namespace EmployeeManagement
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -32,7 +32,7 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<EmployeeDatabaseSettings>(
-                Configuration.GetSection(nameof(EmployeeDatabaseSettings)));
+               this.Configuration.GetSection(nameof(EmployeeDatabaseSettings)));
             services.AddSingleton<IEmployeeDatabaseSettings>(sp =>
               sp.GetRequiredService<IOptions<EmployeeDatabaseSettings>>().Value);
 

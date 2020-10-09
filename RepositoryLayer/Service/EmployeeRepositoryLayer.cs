@@ -1,41 +1,44 @@
-﻿using CommonLayer.Model;
-using MongoDB.Driver;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RepositoryLayer.Service
+﻿namespace RepositoryLayer.Service
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+    using CommonLayer.Model;
+    using MongoDB.Driver;
+    using RepositoryLayer.Interface;
+    
     public class EmployeeRepositoryLayer : IRepositoryLayer
     {
         //private readonly EmployeeService employeeService;
         private readonly IMongoCollection<Employee> _Employee;
+
         public EmployeeRepositoryLayer(IEmployeeDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-            _Employee = database.GetCollection<Employee>(settings.EmployeeCollectionName);
-        }
-        public List<Employee> GetEmployeeDetails()
-        {
-           return  this._Employee.Find(book => true).ToList();
+           this._Employee = database.GetCollection<Employee>(settings.EmployeeCollectionName);
         }
 
-        public bool AddEmployee(EmployeeDetails emp)
+        public List<Employee> GetEmployeeDetails()
+        {
+            return this._Employee.Find(employee => true).ToList();
+        }
+
+        public bool AddEmployee(EmployeeDetails employee)
         {
            
                 try
                 {
                     Employee newEmployee = new Employee()
                     {
-                        EmployeeFirstName = emp.EmployeeFirstName,
-                        EmployeeLastName = emp.EmployeeLastName,
-                        Email = emp.Email,
-                        PhoneNumber = emp.PhoneNumber
+                        EmployeeFirstName = employee.EmployeeFirstName,
+                        EmployeeLastName = employee.EmployeeLastName,
+                        Email = employee.Email,
+                        PhoneNumber = employee.PhoneNumber
                     };
-                    _Employee.InsertOne(newEmployee);
-                    return true;
+                    this._Employee.InsertOne(newEmployee);
+                    return true;                 
                 }
                 catch
                 {
@@ -48,7 +51,7 @@ namespace RepositoryLayer.Service
             try
             {
 
-                _Employee.DeleteOne(employee => employee.Id == id);
+                this._Employee.DeleteOne(employee => employee.Id == id);
                 return true;
             }
             catch
@@ -56,16 +59,20 @@ namespace RepositoryLayer.Service
                 return false;
             }
         }
+
         public bool EditEmployeeDetails(string id, Employee employee)
         {
             try
             {
 
-                _Employee.ReplaceOne(employee => employee.Id == id, employee);
+                this._Employee.ReplaceOne(employee => employee.Id == id, employee);
                 return true;
             }
-            catch { return false; }
+            catch 
+            {
+                return false; 
+            }
         }
-     }
+      }
     }
 

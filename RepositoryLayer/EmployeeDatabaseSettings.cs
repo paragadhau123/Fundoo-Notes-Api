@@ -2,7 +2,7 @@
 
 namespace RepositoryLayer
 {
-    public class EmployeeDatabaseSettings: IEmployeeDatabaseSettings
+    public class EmployeeDatabaseSettings : IEmployeeDatabaseSettings
     {
         public string EmployeeCollectionName { get; set; }
         public string ConnectionString { get; set; }

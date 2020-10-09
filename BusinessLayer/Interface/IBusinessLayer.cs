@@ -1,17 +1,16 @@
-﻿using CommonLayer.Model;
-using RepositoryLayer;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BusinessLayer.Interface
+﻿namespace BusinessLayer.Interface
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using CommonLayer.Model;
+    using RepositoryLayer;
+
     public interface IBusinessLayer
-    {
-       
+    {     
         List<Employee> GetEmployeeDetails();
 
-       public bool AddEmployee(EmployeeDetails emp);
+        public bool AddEmployee(EmployeeDetails employee);
 
         public bool DeleteEmployeeById(string id);
 

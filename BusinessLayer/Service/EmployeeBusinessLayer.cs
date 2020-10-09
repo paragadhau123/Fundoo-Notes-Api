@@ -1,15 +1,14 @@
-﻿using BusinessLayer.Interface;
-using CommonLayer.Model;
-using RepositoryLayer;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BusinessLayer.Service
+﻿namespace BusinessLayer.Service
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using BusinessLayer.Interface;
+    using CommonLayer.Model;
+    using RepositoryLayer;
+    using RepositoryLayer.Interface;
+   
     public class EmployeeBusinessLayer : IBusinessLayer
-
     {
         private IRepositoryLayer repositoryLayer;
 
@@ -23,9 +22,9 @@ namespace BusinessLayer.Service
             return this.repositoryLayer.GetEmployeeDetails();
         }
 
-        public bool AddEmployee(EmployeeDetails emp)
+        public bool AddEmployee(EmployeeDetails employee)
         {
-            return this.repositoryLayer.AddEmployee(emp);
+            return this.repositoryLayer.AddEmployee(employee);
         }
 
         public bool DeleteEmployeeById(string id)
@@ -35,7 +34,7 @@ namespace BusinessLayer.Service
 
         public bool EditEmployeeDetails(string id, Employee employee)
         {
-            return this.repositoryLayer.EditEmployeeDetails(id,employee);
+            return this.repositoryLayer.EditEmployeeDetails(id, employee);
         }
     }
 }
