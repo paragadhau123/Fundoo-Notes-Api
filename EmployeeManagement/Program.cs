@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace EmployeeManagement
 {
     using System;
@@ -9,6 +14,9 @@ namespace EmployeeManagement
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
 
+    /// <summary>
+    /// Program Class
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)

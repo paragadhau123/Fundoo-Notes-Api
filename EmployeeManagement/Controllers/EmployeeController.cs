@@ -1,17 +1,24 @@
-﻿
-using BusinessLayer.Interface;
-using CommonLayer.Model;
-using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer;
-using System;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="EmployeeController.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace EmployeeManagement.Controllers
 {
+    using System;
+    using BusinessLayer.Interface;
+    using CommonLayer.Model;
+    using Microsoft.AspNetCore.Mvc;
+    using RepositoryLayer;
+
+    /// <summary>
+    /// EmployeeController Class
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        IBusinessLayer businessLayer;
+        public IBusinessLayer businessLayer; 
 
         public EmployeeController(IBusinessLayer businessLayer)
         {
@@ -21,54 +28,89 @@ namespace EmployeeManagement.Controllers
         [HttpGet]
         public IActionResult GetAllEmployeeDetails()
         {
-           var result = this.businessLayer.GetEmployeeDetails();
-            return this.Ok(new { sucess = true, message="Records are displayed below succesfully", data = result });
-        }
+            try {
 
+                var result = this.businessLayer.GetEmployeeDetails();
+                if (!result.Equals(null)) {
+                    return this.Ok(new { sucess = true, message = "Records are displayed below succesfully", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { sucess = true, message = "No Records Are Present"});
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return this.BadRequest(new { success, message = e.Message });
+            }
+       }
         [HttpPost]
         public IActionResult AddEmployeeDetails(EmployeeDetails employee)
         {
-            bool result = this.businessLayer.AddEmployee(employee);
+            try {
+                bool result = this.businessLayer.AddEmployee(employee);
 
-            if (result == true)
-            {
-                return this.Ok(new { sucess = true, message = "Record Added" });
+                if (!result.Equals(false))
+                {
+                    return this.Ok(new { sucess = true, message = "Record Added" });
+                }
+                else
+                {
+                    return this.BadRequest(new { sucess = false, message = "Record Not Added"});
+                }
             }
-            else
+            catch(Exception e)
             {
-                return this.BadRequest(new { sucess = false, message = "Record Not Added" });
+                 return this.BadRequest(new { sucess = false, message =e.Message });
             }
         }
 
         [HttpDelete("{id:length(24)}")]
         public IActionResult DeleteEmployeeDetails(string id)
-
         {
-            bool result = this.businessLayer.DeleteEmployeeById(id);
+            try
+            {
+                bool result = this.businessLayer.DeleteEmployeeById(id);
 
-            if (result == true)
-            {
-                return this.Ok(new { sucess = true, message = "Record Deleted" });
+                if (!result.Equals(null))
+                {
+                    return this.Ok(new { sucess = true, message = "Record Deleted Succesfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { sucess = false, message = "No Records To Delete" });
+                }
             }
-            else
+            catch(Exception e)
             {
-                return this.BadRequest(new { sucess = false, message = "Record Not Deleted" });
+                bool success = false;
+                return this.BadRequest(new { success, message = e.Message });
             }
+           
           }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult UpdateEmployeeDetails(String id, Employee employee)
+        public IActionResult UpdateEmployeeDetails(string id, Employee employee)
         {
-            bool result = this.businessLayer.EditEmployeeDetails(id, employee);
+            try
+            {
+                bool result = this.businessLayer.EditEmployeeDetails(id, employee);
 
-            if (result == true)
+                if (!result.Equals(null))
+                {
+                    return this.Ok(new { sucess = true, message = "Record Updated" });
+                }
+                else
+                {
+                    return this.BadRequest(new { sucess = false, message = "No Records To Updated" });
+                }
+            }catch(Exception e)
             {
-                return this.Ok(new { sucess = true, message = "Record Updated" });
+                bool success = false;
+                return this.BadRequest(new { success, message = e.Message });
             }
-            else
-            {
-                return this.BadRequest(new { sucess = false, message = "Record not Updated" });
-            }
+            
         }
     }
 }

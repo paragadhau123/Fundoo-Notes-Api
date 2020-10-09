@@ -1,4 +1,9 @@
-﻿namespace BusinessLayer.Service
+﻿//-----------------------------------------------------------------------
+// <copyright file="EmployeeBusinessLayer.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace BusinessLayer.Service
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +12,10 @@
     using CommonLayer.Model;
     using RepositoryLayer;
     using RepositoryLayer.Interface;
-   
+
+    /// <summary>
+    /// EmployeeBusinessLayer Class
+    /// </summary>
     public class EmployeeBusinessLayer : IBusinessLayer
     {
         private IRepositoryLayer repositoryLayer;

@@ -1,4 +1,9 @@
-﻿namespace RepositoryLayer.Service
+﻿//-----------------------------------------------------------------------
+// <copyright file="EmployeeRepositoryLayer.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace RepositoryLayer.Service
 {
     using System;
     using System.Collections.Generic;
@@ -7,10 +12,12 @@
     using CommonLayer.Model;
     using MongoDB.Driver;
     using RepositoryLayer.Interface;
-    
+
+    /// <summary>
+    /// EmployeeRepositoryLayer Class
+    /// </summary>
     public class EmployeeRepositoryLayer : IRepositoryLayer
     {
-        //private readonly EmployeeService employeeService;
         private readonly IMongoCollection<Employee> _Employee;
 
         public EmployeeRepositoryLayer(IEmployeeDatabaseSettings settings)
@@ -26,8 +33,7 @@
         }
 
         public bool AddEmployee(EmployeeDetails employee)
-        {
-           
+        {           
                 try
                 {
                     Employee newEmployee = new Employee()
@@ -50,7 +56,6 @@
         {
             try
             {
-
                 this._Employee.DeleteOne(employee => employee.Id == id);
                 return true;
             }
@@ -64,7 +69,6 @@
         {
             try
             {
-
                 this._Employee.ReplaceOne(employee => employee.Id == id, employee);
                 return true;
             }
@@ -75,4 +79,3 @@
         }
       }
     }
-

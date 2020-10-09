@@ -1,11 +1,16 @@
-﻿using CommonLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="IRepositoryLayer.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace RepositoryLayer.Interface
 {
-   public interface IRepositoryLayer
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using CommonLayer.Model;
+
+    public interface IRepositoryLayer
     {
         List<Employee> GetEmployeeDetails();
 

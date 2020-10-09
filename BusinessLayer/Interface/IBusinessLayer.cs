@@ -1,4 +1,9 @@
-﻿namespace BusinessLayer.Interface
+﻿//-----------------------------------------------------------------------
+// <copyright file="IBusinessLayer.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace BusinessLayer.Interface
 {
     using System;
     using System.Collections.Generic;

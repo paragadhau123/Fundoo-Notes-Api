@@ -1,10 +1,18 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.ComponentModel.DataAnnotations;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="Employee.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace RepositoryLayer
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
+
+    /// <summary>
+    /// Employee Class
+    /// </summary>
     public class Employee
     {
         [BsonId]
@@ -20,12 +28,11 @@ namespace RepositoryLayer
         public string EmployeeLastName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
-        [RegularExpression(@"^[a-zA-Z0-9]+([.][a-zA-Z0-9]+)?@[a-zA-Z0-9]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2})?$",ErrorMessage ="Please enter a valid email address")]
+        [RegularExpression(@"^[a-zA-Z0-9]+([.][a-zA-Z0-9]+)?@[a-zA-Z0-9]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2})?$", ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Phone Number is required")]
         [RegularExpression(@"^([0-9]{2}[ ]+)?[0-9]{10}$", ErrorMessage = "Please enter a valid phone number")]
         public string PhoneNumber { get; set; }
-
     }
 }

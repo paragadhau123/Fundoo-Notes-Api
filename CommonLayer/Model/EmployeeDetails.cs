@@ -1,9 +1,18 @@
-﻿namespace CommonLayer.Model
+﻿//-----------------------------------------------------------------------
+// <copyright file="EmployeeDetails.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace CommonLayer.Model
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
-    using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// EmployeeDetails Class
+    /// </summary>
     public class EmployeeDetails
     {
         [BsonId]

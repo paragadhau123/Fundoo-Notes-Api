@@ -1,24 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLayer.Interface;
-using BusinessLayer.Service;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using RepositoryLayer;
-using RepositoryLayer.Interface;
-using RepositoryLayer.Service;
-
+//-----------------------------------------------------------------------
+// <copyright file="Startup.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace EmployeeManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using BusinessLayer.Interface;
+    using BusinessLayer.Service;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.HttpsPolicy;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+    using RepositoryLayer;
+    using RepositoryLayer.Interface;
+    using RepositoryLayer.Service;
+
+    /// <summary>
+    /// Startup Class
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -38,7 +46,6 @@ namespace EmployeeManagement
 
             services.AddSingleton<IBusinessLayer, EmployeeBusinessLayer>();
               services.AddSingleton<IRepositoryLayer, EmployeeRepositoryLayer>();
-            //services.AddSingleton<EmployeeService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
@@ -62,5 +69,4 @@ namespace EmployeeManagement
             });
         }
     }
-
 }
