@@ -2,6 +2,8 @@
 using BusinessLayer.Interface;
 using CommonLayer.Model;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryLayer;
+using System;
 
 namespace EmployeeManagement.Controllers
 {
@@ -34,10 +36,10 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
-        public IActionResult delete(string id)
+        public IActionResult Delete(string id)
 
         {
-            bool result = this.businessLayer.deleteEmployeeById(id);
+            bool result = this.businessLayer.DeleteEmployeeById(id);
 
             if (result == true)
                 return this.Ok(new { sucess = true, message = "record deleted" });
@@ -45,5 +47,16 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { sucess = false, message = "record not deleted" });
         }
 
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(String id, Employee employee)
+        {
+            bool result = this.businessLayer.EditEmployeeDetails(id, employee);
+
+            if (result == true)
+                return this.Ok(new { sucess = true, message = "record updated" });
+            else
+                return this.BadRequest(new { sucess = false, message = "record not updated" });
+
+        }
     }
 }

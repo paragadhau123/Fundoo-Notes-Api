@@ -43,7 +43,7 @@ namespace RepositoryLayer.Service
                 }
             }
 
-        public bool deleteEmployeeById(string id)
+        public bool DeleteEmployeeById(string id)
         {
             try
             {
@@ -56,6 +56,16 @@ namespace RepositoryLayer.Service
                 return false;
             }
         }
-    }
+        public bool EditEmployeeDetails(string id, Employee employee)
+        {
+            try
+            {
+
+                _Employee.ReplaceOne(employee => employee.Id == id, employee);
+                return true;
+            }
+            catch { return false; }
+        }
+     }
     }
 

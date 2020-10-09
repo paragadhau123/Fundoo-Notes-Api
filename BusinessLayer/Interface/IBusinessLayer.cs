@@ -13,8 +13,8 @@ namespace BusinessLayer.Interface
 
        public bool AddEmployee(EmployeeDetails emp);
 
-        public bool deleteEmployeeById(string id);
+        public bool DeleteEmployeeById(string id);
 
-
+        public bool EditEmployeeDetails(string id, Employee employee);
     }
 }
