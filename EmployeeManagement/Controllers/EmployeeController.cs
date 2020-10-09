@@ -30,9 +30,9 @@ namespace EmployeeManagement.Controllers
             bool result = this.businessLayer.AddEmployee(emp);
 
             if (result == true)
-                return this.Ok(new { sucess = true, message = "record added" });
+                return this.Ok(new { sucess = true, message = "Record Added" });
             else
-                return this.BadRequest(new { sucess = false, message = "record not added" });
+                return this.BadRequest(new { sucess = false, message = "Record Not Added" });
         }
 
         [HttpDelete("{id:length(24)}")]
@@ -42,9 +42,9 @@ namespace EmployeeManagement.Controllers
             bool result = this.businessLayer.DeleteEmployeeById(id);
 
             if (result == true)
-                return this.Ok(new { sucess = true, message = "record deleted" });
+                return this.Ok(new { sucess = true, message = "Record Deleted" });
             else
-                return this.BadRequest(new { sucess = false, message = "record not deleted" });
+                return this.BadRequest(new { sucess = false, message = "Record Not Deleted" });
         }
 
         [HttpPut("{id:length(24)}")]
@@ -53,9 +53,9 @@ namespace EmployeeManagement.Controllers
             bool result = this.businessLayer.EditEmployeeDetails(id, employee);
 
             if (result == true)
-                return this.Ok(new { sucess = true, message = "record updated" });
+                return this.Ok(new { sucess = true, message = "Record Updated" });
             else
-                return this.BadRequest(new { sucess = false, message = "record not updated" });
+                return this.BadRequest(new { sucess = false, message = "Record not Updated" });
 
         }
     }
