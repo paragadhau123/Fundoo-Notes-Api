@@ -36,7 +36,7 @@ namespace EmployeeManagement.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new { sucess = true, message = "No Records Are Present"});
+                    return this.NotFound(new { sucess = true, message = "No Records Are Present"});
                 }
             }
             catch (Exception e)
@@ -45,6 +45,7 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { success, message = e.Message });
             }
        }
+
         [HttpPost]
         public IActionResult AddEmployeeDetails(EmployeeDetails employee)
         {
@@ -73,13 +74,13 @@ namespace EmployeeManagement.Controllers
             {
                 bool result = this.businessLayer.DeleteEmployeeById(id);
 
-                if (!result.Equals(null))
+                if (!result.Equals(false))
                 {
                     return this.Ok(new { sucess = true, message = "Record Deleted Succesfully" });
                 }
                 else
                 {
-                    return this.BadRequest(new { sucess = false, message = "No Records To Delete" });
+                    return this.NotFound(new { sucess = false, message = "No Records To Delete" });
                 }
             }
             catch(Exception e)
@@ -97,13 +98,13 @@ namespace EmployeeManagement.Controllers
             {
                 bool result = this.businessLayer.EditEmployeeDetails(id, employee);
 
-                if (!result.Equals(null))
+                if (!result.Equals(false))
                 {
                     return this.Ok(new { sucess = true, message = "Record Updated" });
                 }
                 else
                 {
-                    return this.BadRequest(new { sucess = false, message = "No Records To Updated" });
+                    return this.NotFound(new { sucess = false, message = "No Records To Updated" });
                 }
             }catch(Exception e)
             {

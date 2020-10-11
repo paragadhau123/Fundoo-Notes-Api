@@ -21,11 +21,11 @@ namespace RepositoryLayer
 
         [Required(ErrorMessage = "First Name is required")]
         [RegularExpression(@"^[A-Z]{1}[a-z]{2,}$", ErrorMessage = "Please enter a valid first name ")]
-        public string EmployeeFirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required")]
         [RegularExpression(@"^[A-Z]{1}[a-z]{2,}$", ErrorMessage = "Please enter a valid  last name")]
-        public string EmployeeLastName { get; set; }
+        public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression(@"^[a-zA-Z0-9]+([.][a-zA-Z0-9]+)?@[a-zA-Z0-9]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2})?$", ErrorMessage = "Please enter a valid email address")]
