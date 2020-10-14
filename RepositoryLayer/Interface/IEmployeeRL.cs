@@ -10,7 +10,7 @@ namespace RepositoryLayer.Interface
     using System.Text;
     using CommonLayer.Model;
 
-    public interface IRepositoryLayer
+    public interface IEmployeeRL
     {
         List<Employee> GetEmployeeDetails();
 
@@ -19,5 +19,7 @@ namespace RepositoryLayer.Interface
         public bool DeleteEmployeeById(string id);
 
         public bool EditEmployeeDetails(string id, Employee employee);
+
+        Employee Login(LoginModel model);
     }
 }

@@ -6,6 +6,7 @@
 namespace EmployeeManagement.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using BusinessLayer.Interface;
     using CommonLayer.Model;
     using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,42 @@ namespace EmployeeManagement.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        public IBusinessLayer businessLayer; 
+        public IEmployeeBL businessLayer; 
 
-        public EmployeeController(IBusinessLayer businessLayer)
+        public EmployeeController(IEmployeeBL businessLayer)
         {
             this.businessLayer = businessLayer;
         }
 
+        [Route("login")]
+        [HttpPost]    
+        public IActionResult Login(LoginModel model)
+        {
+            try
+            {
+                if (model != null)
+                {
+                    Employee Data = businessLayer.Login(model);
+                    if (Data != null)
+                    {
+                        return Ok(new { Success = true, Message = "Login successful!!", Data });
+                    }
+                    else
+                    {
+                        return BadRequest(new { Success = false, Message = "Wrong Email or Password" });
+                    }
+                }
+                else
+                {
+                    return BadRequest(new { Success = false, Message = "Invalid credentials" });
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { Success = false, Message = e.Message });
+            }
+
+        }
         [HttpGet]
         public IActionResult GetAllEmployeeDetails()
         {

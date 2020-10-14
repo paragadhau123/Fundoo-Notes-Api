@@ -44,8 +44,10 @@ namespace EmployeeManagement
             services.AddSingleton<IEmployeeDatabaseSettings>(sp =>
               sp.GetRequiredService<IOptions<EmployeeDatabaseSettings>>().Value);
 
-            services.AddSingleton<IBusinessLayer, EmployeeBusinessLayer>();
-              services.AddSingleton<IRepositoryLayer, EmployeeRepositoryLayer>();
+            services.AddSingleton<IEmployeeBL, EmployeeBusinessLayer>();
+              services.AddSingleton<IEmployeeRL, EmployeeRepositoryLayer>();
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 

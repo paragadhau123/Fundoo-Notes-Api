@@ -16,11 +16,11 @@ namespace BusinessLayer.Service
     /// <summary>
     /// EmployeeBusinessLayer Class
     /// </summary>
-    public class EmployeeBusinessLayer : IBusinessLayer
+    public class EmployeeBusinessLayer : IEmployeeBL
     {
-        private IRepositoryLayer repositoryLayer;
+        private IEmployeeRL repositoryLayer;
 
-        public EmployeeBusinessLayer(IRepositoryLayer repositoryLayer)
+        public EmployeeBusinessLayer(IEmployeeRL repositoryLayer)
         {
             this.repositoryLayer = repositoryLayer;
         }
@@ -43,6 +43,20 @@ namespace BusinessLayer.Service
         public bool EditEmployeeDetails(string id, Employee employee)
         {
             return this.repositoryLayer.EditEmployeeDetails(id, employee);
+        }
+
+        public Employee Login(LoginModel model)
+        {
+            try
+            {
+               return this.repositoryLayer.Login(model);
+                
+              
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

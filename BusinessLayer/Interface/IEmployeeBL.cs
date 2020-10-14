@@ -11,7 +11,7 @@ namespace BusinessLayer.Interface
     using CommonLayer.Model;
     using RepositoryLayer;
 
-    public interface IBusinessLayer
+    public interface IEmployeeBL
     {     
         List<Employee> GetEmployeeDetails();
 
@@ -20,5 +20,7 @@ namespace BusinessLayer.Interface
         public bool DeleteEmployeeById(string id);
 
         public bool EditEmployeeDetails(string id, Employee employee);
+
+        Employee Login(LoginModel model);
     }
 }

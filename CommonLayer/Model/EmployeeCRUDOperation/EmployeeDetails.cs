@@ -34,5 +34,8 @@ namespace CommonLayer.Model
         [Required(ErrorMessage = "Phone Number is required")]
         [RegularExpression(@"^([0-9]{2}[ ]+)?[0-9]{10}$", ErrorMessage = "Please enter a valid phone number")]
         public string PhoneNumber { get; set; }
+
+        public string Password { get; set; }
+        public string Token { get; set; }
     }
 }
