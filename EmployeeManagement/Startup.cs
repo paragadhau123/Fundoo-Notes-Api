@@ -39,10 +39,10 @@ namespace EmployeeManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<DatabaseSettings>(
-               this.Configuration.GetSection(nameof(DatabaseSettings)));
+            services.Configure<EmployeeDatabaseSettings>(
+               this.Configuration.GetSection(nameof(EmployeeDatabaseSettings)));
             services.AddSingleton<IEmployeeDatabaseSettings>(sp =>
-              sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+              sp.GetRequiredService<IOptions<EmployeeDatabaseSettings>>().Value);
 
             services.AddSingleton<IEmployeeBL, EmployeeBusinessLayer>();
               services.AddSingleton<IEmployeeRL, EmployeeRepositoryLayer>();
