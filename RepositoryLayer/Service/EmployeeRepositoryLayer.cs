@@ -96,8 +96,7 @@ namespace RepositoryLayer.Service
                         EmployeeLastName = employee1.EmployeeLastName,
                         Email = employee1.Email,
                         Password= employee1.Password,
-                        PhoneNumber = employee1.PhoneNumber,
-                        Token= employee1.Token
+                        PhoneNumber = employee1.PhoneNumber,                       
                     };
                     this._Employee.InsertOne(newEmployee);
                     return true;                 

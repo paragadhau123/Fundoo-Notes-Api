@@ -55,6 +55,7 @@ namespace EmployeeManagement.Controllers
             }
 
         }
+
         [HttpGet]
         public IActionResult GetAllEmployeeDetails()
         {
