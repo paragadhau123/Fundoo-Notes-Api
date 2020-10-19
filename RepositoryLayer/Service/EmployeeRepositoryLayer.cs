@@ -136,11 +136,15 @@ namespace RepositoryLayer.Service
         MsmqSender msmq;
         public string ForgetPassword(ForgetPassword forgetPassword)
         {
-            string Email = forgetPassword.Email;
-            string Id = forgetPassword.Id;
-            string Token = GenrateJWTToken(Email, Id);
+            List<Employee> details = this._Employee.Find(employee => employee.Email==forgetPassword.Email).ToList();
+            Employee employee = new Employee();
+
+            employee.Email = details[0].Email;
+            employee.Id = details[0].Id;
+
+            string Token = GenrateJWTToken(employee.Email, employee.Id);
             msmq = new MsmqSender();
-            msmq.SendToMsmq(Token, Email);
+            msmq.SendToMsmq(Token, employee.Id);
             return Token;
         }
       
