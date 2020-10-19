@@ -12,6 +12,8 @@ namespace RepositoryLayer
         [BsonRepresentation(BsonType.ObjectId)]
         public string NoteId { get; set; }
 
+        public string EmployeeId { get; set; }
+
         public string Title { get; set; }
 
         public string Message { get; set; }

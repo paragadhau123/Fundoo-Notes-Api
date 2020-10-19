@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Interface;
 using CommonLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
 
@@ -11,6 +12,7 @@ namespace EmployeeManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class NotesController : ControllerBase
     {
         public INotesBL notesBL;
@@ -23,7 +25,8 @@ namespace EmployeeManagement.Controllers
         public IActionResult AddNotes(AddNotesModel addNotesModel)
         {
             try {
-                bool result = this.notesBL.AddNotes(addNotesModel);
+                string employeeId = this.GetEmpId();
+                bool result = this.notesBL.AddNotes(addNotesModel, employeeId);
                 if (!result.Equals(false)) {
                     return Ok(new { success = result, Message = "Note added" });
                 }
@@ -41,7 +44,8 @@ namespace EmployeeManagement.Controllers
         public IActionResult Display()
         {
             try {
-                var result = this.notesBL.Display();
+                string employeeId = this.GetEmpId();
+                var result = this.notesBL.Display(employeeId);
                 if (!result.Equals(null)) {
                     return Ok(new { success = true, Message = "Note added", Data = result });
                 }
@@ -99,6 +103,10 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { success, message = e.Message });
             }
 
+        }
+        private string GetEmpId()
+        {
+            return User.FindFirst("Id").Value;
         }
     }
 }

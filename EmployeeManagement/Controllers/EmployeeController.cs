@@ -9,12 +9,14 @@ namespace EmployeeManagement.Controllers
     using System.Collections.Generic;
     using BusinessLayer.Interface;
     using CommonLayer.Model;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using RepositoryLayer;
 
     /// <summary>
     /// EmployeeController Class
     /// </summary>
+   /// [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
@@ -27,7 +29,8 @@ namespace EmployeeManagement.Controllers
         }
 
         [Route("login")]
-        [HttpPost]    
+      //  [AllowAnonymous]
+        [HttpPost]
         public IActionResult Login(LoginModel model)
         {
             try
@@ -54,6 +57,21 @@ namespace EmployeeManagement.Controllers
                 return BadRequest(new { Success = false, Message = e.Message });
             }
 
+        }
+
+        [HttpPost("forget")]
+        public IActionResult ForgetPassword(ForgetPassword forgetPassword)
+        {
+           
+            if (forgetPassword != null)
+            {
+                string Token = businessLayer.ForgetPassword(forgetPassword);               
+                return Ok(new { Suceess = true, Meassage = "Forget password conformation", Token, forgetPassword });   
+            }
+            else
+            {
+                return BadRequest(new { Suceess = false, Meassage = "Email Should not be empty" });
+            }
         }
 
         [HttpGet]

@@ -57,5 +57,12 @@ namespace BusinessLayer.Service
                 throw e;
             }
         }
+        public string ForgetPassword(ForgetPassword forgetPassword)
+        {
+            string Token = repositoryLayer.ForgetPassword(forgetPassword);
+            return Token;
+        }
+
+       
     }
 }

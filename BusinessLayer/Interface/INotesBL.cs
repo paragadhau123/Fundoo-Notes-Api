@@ -8,9 +8,9 @@ namespace BusinessLayer.Interface
 {
    public interface INotesBL
     {       
-        bool AddNotes(AddNotesModel addNotesModel);
+        bool AddNotes(AddNotesModel addNotesModel, string employeeId);
 
-        List<Notes> Display();
+        List<Notes> Display(string employeeId);
 
         bool EditNotes(string noteId, Notes note);
 

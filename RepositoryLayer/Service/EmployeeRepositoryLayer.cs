@@ -13,6 +13,7 @@ namespace RepositoryLayer.Service
     using System.Security.Cryptography;
     using System.Text;
     using CommonLayer.Model;
+    using CommonLayer.MSMQ;
     using Microsoft.IdentityModel.Tokens;
     using MongoDB.Driver;
     using RepositoryLayer.Interface;
@@ -42,7 +43,6 @@ namespace RepositoryLayer.Service
             List<Employee> validation = _Employee.Find(employee => employee.Email == model.Email && employee.Password == model.Password).ToList();
 
             Employee newEmployee = new Employee();
-
             newEmployee.Id = validation[0].Id;
             newEmployee.EmployeeFirstName = validation[0].EmployeeFirstName;
             newEmployee.EmployeeLastName = validation[0].EmployeeLastName;
@@ -133,6 +133,16 @@ namespace RepositoryLayer.Service
             }
         }
 
-       
+        MsmqSender msmq;
+        public string ForgetPassword(ForgetPassword forgetPassword)
+        {
+            string Email = forgetPassword.Email;
+            string Id = forgetPassword.Id;
+            string Token = GenrateJWTToken(Email, Id);
+            msmq = new MsmqSender();
+            msmq.SendToMsmq(Token, Email);
+            return Token;
+        }
+      
     }
 }
