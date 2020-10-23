@@ -22,6 +22,7 @@ namespace BusinessLayer.Interface
         public bool EditEmployeeDetails(string id, Employee employee);
 
         Employee Login(LoginModel model);
-        string ForgetPassword(ForgetPassword forgetPassword);
+        string ForgetPassword(ForgetPassword model);
+        bool ResetPassword( ResetPassword resetPassword,string employeeId);
     }
 }

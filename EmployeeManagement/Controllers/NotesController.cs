@@ -21,6 +21,7 @@ namespace EmployeeManagement.Controllers
         {
             this.notesBL = notesBL;
         }
+
         [HttpPost]
         public IActionResult AddNotes(AddNotesModel addNotesModel)
         {
@@ -110,3 +111,4 @@ namespace EmployeeManagement.Controllers
         }
     }
 }
+ 

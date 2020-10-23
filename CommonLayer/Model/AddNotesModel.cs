@@ -21,10 +21,7 @@ namespace CommonLayer.Model
 
         public bool IsPin { get; set; }
 
-
         public bool IsArchive { get; set; }
-
-
 
     }
 }

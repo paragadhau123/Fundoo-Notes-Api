@@ -9,20 +9,20 @@ namespace EmployeeManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
+   
     using BusinessLayer.Interface;
     using BusinessLayer.Service;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.HttpsPolicy;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
+   
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
+    using Microsoft.OpenApi.Models;
     using RepositoryLayer;
     using RepositoryLayer.Interface;
     using RepositoryLayer.Service;
@@ -55,11 +55,7 @@ namespace EmployeeManagement
             services.AddSingleton<INotesBL, NotesBL>();
             services.AddSingleton<INotesRL, NotesRL>();
 
-          /* var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();*/
+         
             var key = Encoding.ASCII.GetBytes("SuperSecretKey@345fghhhhhhhhhhhhhhhhhhhhhhhhhhhhhfggggggg");
             services.AddAuthentication(x =>
             {
@@ -79,10 +75,18 @@ namespace EmployeeManagement
                 };
             });
 
-            // configure DI for application services
-            //services.AddScoped<IUserService, UserService>();
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+           
+                services.AddControllers();
+                services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyTestService", Version = "v1", });
+                    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                });
+            
 
         }
       
@@ -95,6 +99,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
                 app.UseDeveloperExceptionPage();
             }
 
+          
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
@@ -105,6 +111,12 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
                 endpoints.MapControllers();
             });
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./v1/swagger.json", "TestService");
+            });
         }
     }
 }

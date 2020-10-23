@@ -8,15 +8,23 @@ namespace RepositoryLayer.Service
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Configuration;
     using System.IdentityModel.Tokens.Jwt;
+    using System.Net;
+    using System.Net.Mail;
     using System.Security.Claims;
     using System.Security.Cryptography;
     using System.Text;
+    using System.Threading.Tasks;
     using CommonLayer.Model;
     using CommonLayer.MSMQ;
+    using Experimental.System.Messaging;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.IdentityModel.Tokens;
+    using MongoDB.Bson;
     using MongoDB.Driver;
     using RepositoryLayer.Interface;
+    using ServiceStack;
 
     /// <summary>
     /// EmployeeRepositoryLayer Class
@@ -29,7 +37,7 @@ namespace RepositoryLayer.Service
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-           this._Employee = database.GetCollection<Employee>(settings.EmployeeCollectionName);
+            this._Employee = database.GetCollection<Employee>(settings.EmployeeCollectionName);
         }
 
         public List<Employee> GetEmployeeDetails()
@@ -87,25 +95,25 @@ namespace RepositoryLayer.Service
 
 
         public bool AddEmployee(EmployeeDetails employee1)
-        {           
-                try
-                {
+        {
+            try
+            {
                 Employee newEmployee = new Employee()
-                    {
-                        EmployeeFirstName = employee1.EmployeeFirstName,
-                        EmployeeLastName = employee1.EmployeeLastName,
-                        Email = employee1.Email,
-                        Password= employee1.Password,
-                        PhoneNumber = employee1.PhoneNumber,                       
-                    };
-                    this._Employee.InsertOne(newEmployee);
-                    return true;                 
-                }
-                catch
                 {
-                    return false;
-                }
+                    EmployeeFirstName = employee1.EmployeeFirstName,
+                    EmployeeLastName = employee1.EmployeeLastName,
+                    Email = employee1.Email,
+                    Password = employee1.Password,
+                    PhoneNumber = employee1.PhoneNumber,
+                };
+                this._Employee.InsertOne(newEmployee);
+                return true;
             }
+            catch
+            {
+                return false;
+            }
+        }
 
         public bool DeleteEmployeeById(string id)
         {
@@ -127,26 +135,32 @@ namespace RepositoryLayer.Service
                 this._Employee.ReplaceOne(employee => employee.Id == id, employee);
                 return true;
             }
-            catch 
+            catch
             {
-                return false; 
+                return false;
             }
         }
 
-        MsmqSender msmq;
-        public string ForgetPassword(ForgetPassword forgetPassword)
+        public string ForgetPassword(ForgetPassword model)
         {
-            List<Employee> details = this._Employee.Find(employee => employee.Email==forgetPassword.Email).ToList();
+            List<Employee> details = this._Employee.Find(employee => employee.Email == model.Email).ToList();
             Employee employee = new Employee();
 
             employee.Email = details[0].Email;
             employee.Id = details[0].Id;
 
             string Token = GenrateJWTToken(employee.Email, employee.Id);
-            msmq = new MsmqSender();
+            MsmqSender msmq = new MsmqSender();
             msmq.SendToMsmq(Token, employee.Id);
             return Token;
         }
-      
+
+        public bool ResetPassword(ResetPassword resetPassword, string employeeId)
+        {           
+            var filter = Builders<Employee>.Filter.Eq("Id", employeeId);
+            var update = Builders<Employee>.Update.Set("Password", resetPassword.NewPassword);
+            _Employee.UpdateOne(filter, update);
+            return true;              
+        }
     }
-}
+} 

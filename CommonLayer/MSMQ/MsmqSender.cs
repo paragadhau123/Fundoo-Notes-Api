@@ -16,7 +16,7 @@ namespace CommonLayer.MSMQ
                 MessageQueue.Create(msmq.Path);
             }
             Message message = new Message();
-            //message.Formatter = new XmlMessageFormatter();
+            message.Formatter = new BinaryMessageFormatter();
             message.Body = token;
             msmq.Send(message, email);
         }

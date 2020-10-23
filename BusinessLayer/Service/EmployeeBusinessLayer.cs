@@ -57,12 +57,16 @@ namespace BusinessLayer.Service
                 throw e;
             }
         }
-        public string ForgetPassword(ForgetPassword forgetPassword)
+        public string ForgetPassword(ForgetPassword model)
         {
-            string Token = repositoryLayer.ForgetPassword(forgetPassword);
+            string Token = repositoryLayer.ForgetPassword(model);
             return Token;
         }
 
-       
+        public bool ResetPassword( ResetPassword resetPassword, string employeeId)
+        {
+            bool pass = repositoryLayer.ResetPassword(resetPassword, employeeId);
+            return pass;
+        }
     }
 }
