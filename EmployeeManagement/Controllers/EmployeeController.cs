@@ -34,8 +34,7 @@ namespace EmployeeManagement.Controllers
             this.businessLayer = businessLayer;
         }
        
-        [Route("login")]
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login(LoginModel model)
         {
             try
@@ -59,7 +58,7 @@ namespace EmployeeManagement.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(new { Success = false, Message = e.Message });
+                return BadRequest(new { Success = false, message = e.Message });
             }
 
         }
@@ -91,11 +90,11 @@ namespace EmployeeManagement.Controllers
 
                     smtpClient.Send(mailMessage);
 
-                    return Ok(new { success = true, Message = "mail send to your email", token = Token });
+                    return Ok(new { success = true, Message = "Reset password link has been sent to your email", token = Token });
                 }
                 else
                 {
-                    return BadRequest(new { Suceess = false, Meassage = "Email can not be empty" });
+                    return BadRequest(new { Suceess = false, Meassage = "Email field can not be empty" });
                 }
             }
             catch(Exception e)
@@ -111,8 +110,7 @@ namespace EmployeeManagement.Controllers
         {
             try {
                 if (resetPassword != null)
-                {
-                    string Token = ReceiveMessage();
+                {                   
                     string employeeId = this.GetEmpId();
                     bool pass = this.businessLayer.ResetPassword(resetPassword, employeeId);
                     return this.Ok(new { Success = true, Message = "Password is changed succesfully" });
@@ -124,7 +122,7 @@ namespace EmployeeManagement.Controllers
             }
             catch(Exception e)
             {
-                return this.BadRequest(new {Success = false, Message=e.Message });
+                return this.BadRequest(new {Success = false, message=e.Message });
             }
            
         }
@@ -217,19 +215,7 @@ namespace EmployeeManagement.Controllers
             }
             
         }
-        private static string ReceiveMessage()
-        {
-            using (MessageQueue myQueue = new MessageQueue())
-            {
-                myQueue.Path = @".\private$\ForgotPassword";
-                Message message = new Message();
-                message = myQueue.Receive(new TimeSpan(0, 0, 5));
-                message.Formatter = new BinaryMessageFormatter();
-                string msg = message.Body.ToString();
-                return msg;
-            }
-        }
-
+       
         private string GetEmpId()
         {
             return User.FindFirst("Id").Value;

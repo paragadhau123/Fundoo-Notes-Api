@@ -150,8 +150,10 @@ namespace RepositoryLayer.Service
             employee.Id = details[0].Id;
 
             string Token = GenrateJWTToken(employee.Email, employee.Id);
-            MsmqSender msmq = new MsmqSender();
+            Msmq msmq = new Msmq();
             msmq.SendToMsmq(Token, employee.Id);
+            
+
             return Token;
         }
 
@@ -162,5 +164,11 @@ namespace RepositoryLayer.Service
             _Employee.UpdateOne(filter, update);
             return true;              
         }
+        
+        public void SendEmail()
+        {
+
+        }
+        
     }
 } 

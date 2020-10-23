@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CommonLayer.MSMQ
 {
-   public class MsmqSender
+   public class Msmq
     {
         public void SendToMsmq(string token, string email)
         {
@@ -19,6 +19,19 @@ namespace CommonLayer.MSMQ
             message.Formatter = new BinaryMessageFormatter();
             message.Body = token;
             msmq.Send(message, email);
+        }
+
+        public static string ReceiveMessage()
+        {
+            using (MessageQueue myQueue = new MessageQueue())
+            {
+                myQueue.Path = @".\private$\ForgotPassword";
+                Message message = new Message();
+                message = myQueue.Receive(new TimeSpan(0, 0, 5));
+                message.Formatter = new BinaryMessageFormatter();
+                string msg = message.Body.ToString();
+                return msg;
+            }
         }
     }
 }
