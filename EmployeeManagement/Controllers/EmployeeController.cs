@@ -19,13 +19,12 @@ namespace EmployeeManagement.Controllers
     using MimeKit;
     using MimeKit.Text;
     using RepositoryLayer;
+
     /// <summary>
     /// EmployeeController Class
     /// </summary>
-    /// [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-
     public class EmployeeController : ControllerBase
     {
         public IEmployeeBL businessLayer;
@@ -35,10 +34,7 @@ namespace EmployeeManagement.Controllers
             this.businessLayer = businessLayer;
         }
        
-
-
         [Route("login")]
-        //  [AllowAnonymous]
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
@@ -71,48 +67,69 @@ namespace EmployeeManagement.Controllers
         [HttpPost("forget")]
         public IActionResult ForgetPassword(ForgetPassword model)
         {
-            if (model != null)
+            try
             {
-                string Token = businessLayer.ForgetPassword(model);
-
-                var passwordResetLink = Url.Action("ResetPassword", "Employee",
-                new { email = model.Email, token = Token }, Request.Scheme);
-
-                MailMessage mailMessage = new MailMessage(model.Email, model.Email);
-
-                mailMessage.Subject = "reset password";             
-                mailMessage.Body = passwordResetLink;
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential()
+                if (model != null)
                 {
-                    UserName = model.Email,
-                    Password = "parag123#"
-                };
-                smtpClient.EnableSsl = true;
-               
-                smtpClient.Send(mailMessage);
+                    string Token = businessLayer.ForgetPassword(model);
 
-                return Ok(new { success = true, message = "mail send to your email", token = Token });   
+                    var passwordResetLink = Url.Action("ResetPassword", "Employee",
+                    new { email = model.Email, token = Token }, Request.Scheme);
+
+                    MailMessage mailMessage = new MailMessage(model.Email, model.Email);
+
+                    mailMessage.Subject = "reset password";
+                    mailMessage.Body = passwordResetLink;
+                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential()
+                    {
+                        UserName = model.Email,
+                        Password = "parag123#"
+                    };
+                    smtpClient.EnableSsl = true;
+
+                    smtpClient.Send(mailMessage);
+
+                    return Ok(new { success = true, Message = "mail send to your email", token = Token });
+                }
+                else
+                {
+                    return BadRequest(new { Suceess = false, Meassage = "Email can not be empty" });
+                }
             }
-            else
+            catch(Exception e)
             {
-                return BadRequest(new { Suceess = false, Meassage = "Email Should not be empty" });
-            }
+                return BadRequest(new { Suceess = false, Meassage = e.Message });
+            }           
         }
 
 
-       
-        [HttpPost("reset")]      
+
+        [HttpPost("reset")]
         public IActionResult ResetPassword(ResetPassword resetPassword)
         {
-            string Token = ReceiveMessage();
-            string employeeId = this.GetEmpId();            
-            bool pass = this.businessLayer.ResetPassword(resetPassword, employeeId);
-            return this.Ok(new { success = true,pass });
+            try {
+                if (resetPassword != null)
+                {
+                    string Token = ReceiveMessage();
+                    string employeeId = this.GetEmpId();
+                    bool pass = this.businessLayer.ResetPassword(resetPassword, employeeId);
+                    return this.Ok(new { Success = true, Message = "Password is changed succesfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, Message = "NewPassword can not be empty" });
+                }
+            }
+            catch(Exception e)
+            {
+                return this.BadRequest(new {Success = false, Message=e.Message });
+            }
+           
         }
-      
-        [HttpGet("employee")]
+
+        [HttpGet]
         public IActionResult GetAllEmployeeDetails()
         {
             try {
@@ -133,7 +150,7 @@ namespace EmployeeManagement.Controllers
             }
        }
 
-        [HttpPost("employee")]
+        [HttpPost]
         public IActionResult AddEmployeeDetails(EmployeeDetails employee)
         {
             try {
