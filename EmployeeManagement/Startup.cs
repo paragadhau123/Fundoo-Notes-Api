@@ -86,7 +86,7 @@ namespace EmployeeManagement
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Fundoo API",
+                    Title = "Fundoo Notes",
                     Description = "Swagger Fundoo Api",
 
                     License = new OpenApiLicense
@@ -151,7 +151,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("./v1/swagger.json", "TestService");
+                c.SwaggerEndpoint("./v1/swagger.json", "Fundoo Notes");
             });
         }
     }

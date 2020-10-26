@@ -34,7 +34,7 @@ namespace EmployeeManagement.Controllers
             this.businessLayer = businessLayer;
         }
        
-        [HttpPost("login")]
+        [HttpPost("LoginAccount")]
         public IActionResult Login(LoginModel model)
         {
             try
@@ -63,7 +63,7 @@ namespace EmployeeManagement.Controllers
 
         }
 
-        [HttpPost("forget")]
+        [HttpPost("ForgetPassword")]
         public IActionResult ForgetPassword(ForgetPassword model)
         {
             try
@@ -105,7 +105,7 @@ namespace EmployeeManagement.Controllers
 
 
 
-        [HttpPost("reset")]
+        [HttpPost("ResetPassword")]
         public IActionResult ResetPassword(ResetPassword resetPassword)
         {
             try {
@@ -127,7 +127,7 @@ namespace EmployeeManagement.Controllers
            
         }
 
-        [HttpGet("getallaccounts")]
+        [HttpGet("GetAllAccounts")]
         public IActionResult GetAllAccountsDetails()
         {
             try {
@@ -148,7 +148,7 @@ namespace EmployeeManagement.Controllers
             }
        }
 
-        [HttpPost("register")]
+        [HttpPost("RegisterAccount")]
         public IActionResult RegisterAccount(AccountsDetails accounts)
         {
             try {

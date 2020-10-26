@@ -18,7 +18,7 @@ namespace RepositoryLayer.Service
             this._Note = database.GetCollection<Notes>(settings.NotesCollectionName);
         }
 
-        public bool AddNotes(NotesModel addNotesModel, string accountID)
+        public Notes AddNotes(NotesModel addNotesModel, string accountID)
         {
             try {
                 Notes note = new Notes()
@@ -33,11 +33,11 @@ namespace RepositoryLayer.Service
                     IsTrash=addNotesModel.IsTrash
                 };
                 this._Note.InsertOne(note);
-                return true;
+                return note;
             }
             catch(Exception e)
             {
-                return false;
+                return null;
             }
         }
 
@@ -59,16 +59,16 @@ namespace RepositoryLayer.Service
             return this._Note.Find(note => note.AccountId == accountID).ToList();
         }
 
-        public bool EditNotes(string noteId, Notes note)
+        public Notes EditNotes(string noteId, Notes note)
         {
             try
             {
                 this._Note.ReplaceOne(note => note.NoteId == noteId, note);
-                return true;
+                return note;
             }
             catch (Exception e) 
             {
-                return false;
+                return null;
             }
            
         }

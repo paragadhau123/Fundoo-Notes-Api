@@ -16,7 +16,7 @@ namespace BusinessLayer.Service
         {
             this.notesRL = notesRL;
         }
-        public bool AddNotes(NotesModel addNotesModel, string accountID)
+        public Notes AddNotes(NotesModel addNotesModel, string accountID)
         {
             return this.notesRL.AddNotes(addNotesModel, accountID);
         }
@@ -31,7 +31,7 @@ namespace BusinessLayer.Service
             return this.notesRL.Display(accountID);
         }
 
-        public bool EditNotes(string noteId, Notes note)
+        public Notes EditNotes(string noteId, Notes note)
         {
             return this.notesRL.EditNotes(noteId, note);
         }

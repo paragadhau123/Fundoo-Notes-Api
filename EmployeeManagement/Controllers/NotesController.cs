@@ -42,7 +42,7 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { sucess = false, message = e.Message });
             }
 }
-        [HttpGet]
+        [HttpGet("DisplayNotes")]
         public IActionResult Display()
         {
             try {
