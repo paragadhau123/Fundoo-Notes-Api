@@ -21,7 +21,11 @@ namespace EmployeeManagement.Controllers
         {
             this.notesBL = notesBL;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="addNotesModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult AddNotes(AddNotesModel addNotesModel)
         {
