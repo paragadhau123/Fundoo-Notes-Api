@@ -21,7 +21,9 @@ namespace RepositoryLayer.Interface
         public bool UpdateAccountDetails(string id, Accounts accounts);
 
         Accounts Login(LoginModel model);
+
         string ForgetPassword(ForgetPassword model);
+
         bool ResetPassword( ResetPassword resetPassword, string accountId);
     }
 }
