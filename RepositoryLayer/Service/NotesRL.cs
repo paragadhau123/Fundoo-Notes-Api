@@ -30,6 +30,7 @@ namespace RepositoryLayer.Service
                     Color = addNotesModel.Color,
                     IsPin = addNotesModel.IsPin,
                     IsArchive = addNotesModel.IsArchive,
+                    IsTrash=addNotesModel.IsTrash
                 };
                 this._Note.InsertOne(note);
                 return true;

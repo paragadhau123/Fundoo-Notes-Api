@@ -23,14 +23,14 @@ namespace EmployeeManagement.Controllers
         }
   
        
-        [HttpPost]
+        [HttpPost("AddNote")]
         public IActionResult AddNotes(NotesModel addNotesModel)
         {
             try {
                 string accountID = this.GetAccountId(); ;
-                bool result = this.notesBL.AddNotes(addNotesModel, accountID);
+                Notes result = this.notesBL.AddNotes(addNotesModel, accountID);
                 if (!result.Equals(false)) {
-                    return Ok(new { success = result, Message = "Note added" });
+                    return Ok(new { success = result, Message = "Note added succesfully" });
                 }
                 else
                 {
@@ -49,11 +49,11 @@ namespace EmployeeManagement.Controllers
                 string accountID = this.GetAccountId();
                 var result = this.notesBL.Display(accountID);
                 if (!result.Equals(null)) {
-                    return Ok(new { success = true, Message = "Note added", Data = result });
+                    return Ok(new { success = true, Message = "Note displayed below succesfully", Data = result });
                 }
                 else
                 {
-                    return this.NotFound(new { sucess = true, message = "No Notes Are Present" });
+                    return this.NotFound(new { sucess = true, message = "No Notes Are Present to display" });
                 }
             }
             catch(Exception e)
@@ -67,7 +67,7 @@ namespace EmployeeManagement.Controllers
         {
             try
             {
-                bool result = this.notesBL.EditNotes(noteId, note);
+                Notes result = this.notesBL.EditNotes(noteId, note);
                 if (!result.Equals(false)) 
                 {
                     return Ok(new { success = result, Message = "Note is updated successfully" });
@@ -79,7 +79,7 @@ namespace EmployeeManagement.Controllers
                 }
             }catch(Exception e)
             {
-                return BadRequest(new { success = false, Message = e.Message });
+                return BadRequest(new { success = false, message = e.Message });
             }
         }
 

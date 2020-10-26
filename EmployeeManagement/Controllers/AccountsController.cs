@@ -127,7 +127,7 @@ namespace EmployeeManagement.Controllers
            
         }
 
-        [HttpGet]
+        [HttpGet("getallaccounts")]
         public IActionResult GetAllAccountsDetails()
         {
             try {
@@ -148,7 +148,7 @@ namespace EmployeeManagement.Controllers
             }
        }
 
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult RegisterAccount(AccountsDetails accounts)
         {
             try {

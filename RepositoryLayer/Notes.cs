@@ -26,6 +26,7 @@ namespace RepositoryLayer
 
         public bool IsArchive { get; set; }
 
+        public bool IsTrash { get; set; }
 
     }
 }

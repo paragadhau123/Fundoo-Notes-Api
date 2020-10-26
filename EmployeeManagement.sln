@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement", "EmployeeManagement\EmployeeManagement.csproj", "{CC9F3A80-4A74-4CA4-86D1-0853687D9853}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooNotes", "EmployeeManagement\FundooNotes.csproj", "{CC9F3A80-4A74-4CA4-86D1-0853687D9853}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{2F3E9D60-C911-4DF7-937A-8A9536635E38}"
 EndProject

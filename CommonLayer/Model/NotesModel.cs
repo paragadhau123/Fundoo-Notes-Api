@@ -23,5 +23,6 @@ namespace CommonLayer.Model
 
         public bool IsArchive { get; set; }
 
+        public bool IsTrash { get; set; }
     }
 }
