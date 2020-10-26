@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CommonLayer.Model
 {
-    public class AddNotesModel
+    public class NotesModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

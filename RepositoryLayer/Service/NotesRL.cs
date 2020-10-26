@@ -18,13 +18,13 @@ namespace RepositoryLayer.Service
             this._Note = database.GetCollection<Notes>(settings.NotesCollectionName);
         }
 
-        public bool AddNotes(AddNotesModel addNotesModel, string employeeId)
+        public bool AddNotes(NotesModel addNotesModel, string accountID)
         {
             try {
                 Notes note = new Notes()
                 {
                     Title = addNotesModel.Title,
-                    EmployeeId=employeeId,
+                    AccountId = accountID,
                     Message = addNotesModel.Message,
                     Image = addNotesModel.Image,
                     Color = addNotesModel.Color,
@@ -53,9 +53,9 @@ namespace RepositoryLayer.Service
             }
         }
 
-        public List<Notes> Display(string employeeId)
+        public List<Notes> Display(string accountID)
         {
-            return this._Note.Find(note => note.EmployeeId==employeeId).ToList();
+            return this._Note.Find(note => note.AccountId == accountID).ToList();
         }
 
         public bool EditNotes(string noteId, Notes note)

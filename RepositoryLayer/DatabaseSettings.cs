@@ -14,7 +14,7 @@ namespace RepositoryLayer
 
         public string DatabaseName { get; set; }
 
-        public string EmployeeCollectionName { get; set; }
+        public string AccountsCollectionName { get; set; }
 
 
         public string NotesCollectionName { get; set; }
@@ -26,7 +26,7 @@ namespace RepositoryLayer
 
         string DatabaseName { get; set; }
 
-        string EmployeeCollectionName { get; set; }
+        string AccountsCollectionName { get; set; }
 
         string NotesCollectionName { get; set; }
 

@@ -16,36 +16,36 @@ namespace BusinessLayer.Service
     /// <summary>
     /// EmployeeBusinessLayer Class
     /// </summary>
-    public class EmployeeBusinessLayer : IEmployeeBL
+    public class AccountsBusinessLayer : IAccountsBL
     {
-        private IEmployeeRL repositoryLayer;
+        private IAccountsRL repositoryLayer;
 
-        public EmployeeBusinessLayer(IEmployeeRL repositoryLayer)
+        public AccountsBusinessLayer(IAccountsRL repositoryLayer)
         {
             this.repositoryLayer = repositoryLayer;
         }
 
-        public List<Employee> GetEmployeeDetails()
+        public List<Accounts> GetAccountsDetails()
         {
-            return this.repositoryLayer.GetEmployeeDetails();
+            return this.repositoryLayer.GetAccountsDetails();
         }
 
-        public bool AddEmployee(EmployeeDetails employee)
+        public bool RegisterAccount(AccountsDetails accounts)
         {
-            return this.repositoryLayer.AddEmployee(employee);
+            return this.repositoryLayer.RegisterAccount(accounts);
         }
 
-        public bool DeleteEmployeeById(string id)
+        public bool DeleteAccountById(string id)
         {
-            return this.repositoryLayer.DeleteEmployeeById(id);
+            return this.repositoryLayer.DeleteAccountById(id);
         }
 
-        public bool EditEmployeeDetails(string id, Employee employee)
+        public bool UpdateAccountDetails(string id, Accounts accounts)
         {
-            return this.repositoryLayer.EditEmployeeDetails(id, employee);
+            return this.repositoryLayer.UpdateAccountDetails(id, accounts);
         }
 
-        public Employee Login(LoginModel model)
+        public Accounts Login(LoginModel model)
         {
             try
             {
@@ -63,9 +63,9 @@ namespace BusinessLayer.Service
             return Token;
         }
 
-        public bool ResetPassword( ResetPassword resetPassword, string employeeId)
+        public bool ResetPassword( ResetPassword resetPassword, string accountId)
         {
-            bool pass = repositoryLayer.ResetPassword(resetPassword, employeeId);
+            bool pass = repositoryLayer.ResetPassword(resetPassword, accountId);
             return pass;
         }
     }

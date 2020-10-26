@@ -25,11 +25,11 @@ namespace EmployeeManagement.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class AccountsController : ControllerBase
     {
-        public IEmployeeBL businessLayer;
+        public IAccountsBL businessLayer;
 
-        public EmployeeController(IEmployeeBL businessLayer)
+        public AccountsController(IAccountsBL businessLayer)
         {
             this.businessLayer = businessLayer;
         }
@@ -41,10 +41,10 @@ namespace EmployeeManagement.Controllers
             {
                 if (model != null)
                 {
-                    Employee Data = businessLayer.Login(model);
+                    Accounts Data = businessLayer.Login(model);
                     if (Data != null)
                     {
-                        return Ok(new { Success = true, Message = "Login successful!!", Data });
+                        return Ok(new { Success = true, Message = "Login Successful", Data });
                     }
                     else
                     {
@@ -111,8 +111,8 @@ namespace EmployeeManagement.Controllers
             try {
                 if (resetPassword != null)
                 {                   
-                    string employeeId = this.GetEmpId();
-                    bool pass = this.businessLayer.ResetPassword(resetPassword, employeeId);
+                    string accountId = this.GetAccountId();
+                    bool pass = this.businessLayer.ResetPassword(resetPassword, accountId);
                     return this.Ok(new { Success = true, Message = "Password is changed succesfully" });
                 }
                 else
@@ -128,11 +128,11 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllEmployeeDetails()
+        public IActionResult GetAllAccountsDetails()
         {
             try {
 
-                var result = this.businessLayer.GetEmployeeDetails();
+                var result = this.businessLayer.GetAccountsDetails();
                 if (!result.Equals(null)) {
                     return this.Ok(new { sucess = true, message = "Records are displayed below succesfully", data = result });
                 }
@@ -149,14 +149,14 @@ namespace EmployeeManagement.Controllers
        }
 
         [HttpPost]
-        public IActionResult AddEmployeeDetails(EmployeeDetails employee)
+        public IActionResult RegisterAccount(AccountsDetails accounts)
         {
             try {
-                bool result = this.businessLayer.AddEmployee(employee);
+                bool result = this.businessLayer.RegisterAccount(accounts);
 
                 if (!result.Equals(false))
                 {
-                    return this.Ok(new { sucess = true, message = "Record Added" });
+                    return this.Ok(new { sucess = true, message = "Record Added Succesfully" });
                 }
                 else
                 {
@@ -170,11 +170,11 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
-        public IActionResult DeleteEmployeeDetails(string id)
+        public IActionResult DeleteAccountById(string id)
         {
             try
             {
-                bool result = this.businessLayer.DeleteEmployeeById(id);
+                bool result = this.businessLayer.DeleteAccountById(id);
 
                 if (!result.Equals(false))
                 {
@@ -194,15 +194,15 @@ namespace EmployeeManagement.Controllers
           }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult UpdateEmployeeDetails(string id, Employee employee)
+        public IActionResult UpdateAccountDetails(string id, Accounts accounts)
         {
             try
             {
-                bool result = this.businessLayer.EditEmployeeDetails(id, employee);
+                bool result = this.businessLayer.UpdateAccountDetails(id, accounts);
 
                 if (!result.Equals(false))
                 {
-                    return this.Ok(new { sucess = true, message = "Record Updated" });
+                    return this.Ok(new { sucess = true, message = "Record Updated Succesfully" });
                 }
                 else
                 {
@@ -216,7 +216,7 @@ namespace EmployeeManagement.Controllers
             
         }
        
-        private string GetEmpId()
+        private string GetAccountId()
         {
             return User.FindFirst("Id").Value;
         }

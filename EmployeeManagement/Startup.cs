@@ -49,8 +49,8 @@ namespace EmployeeManagement
             services.AddSingleton<IEmployeeDatabaseSettings>(sp =>
               sp.GetRequiredService<IOptions<EmployeeDatabaseSettings>>().Value);
 
-            services.AddSingleton<IEmployeeBL, EmployeeBusinessLayer>();
-            services.AddSingleton<IEmployeeRL, EmployeeRepositoryLayer>();
+            services.AddSingleton<IAccountsBL, AccountsBusinessLayer>();
+            services.AddSingleton<IAccountsRL, AccountsRepositoryLayer>();
 
             services.AddSingleton<INotesBL, NotesBL>();
             services.AddSingleton<INotesRL, NotesRL>();

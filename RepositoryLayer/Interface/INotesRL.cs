@@ -7,9 +7,9 @@ namespace RepositoryLayer.Interface
 {
     public interface INotesRL
     {
-        bool AddNotes(AddNotesModel addNotesModel, string employeeId);
+        bool AddNotes(NotesModel addNotesModel, string accountID);
 
-        List<Notes> Display(string employeeId);
+        List<Notes> Display(string accountID);
 
         bool EditNotes(string noteId, Notes note);
 

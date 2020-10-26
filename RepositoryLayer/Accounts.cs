@@ -13,7 +13,7 @@ namespace RepositoryLayer
     /// <summary>
     /// Employee Class
     /// </summary>
-    public class Employee
+    public class Accounts
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

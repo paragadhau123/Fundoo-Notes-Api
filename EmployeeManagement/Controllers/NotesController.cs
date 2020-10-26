@@ -21,17 +21,14 @@ namespace EmployeeManagement.Controllers
         {
             this.notesBL = notesBL;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="addNotesModel"></param>
-        /// <returns></returns>
+  
+       
         [HttpPost]
-        public IActionResult AddNotes(AddNotesModel addNotesModel)
+        public IActionResult AddNotes(NotesModel addNotesModel)
         {
             try {
-                string employeeId = this.GetEmpId();
-                bool result = this.notesBL.AddNotes(addNotesModel, employeeId);
+                string accountID = this.GetAccountId(); ;
+                bool result = this.notesBL.AddNotes(addNotesModel, accountID);
                 if (!result.Equals(false)) {
                     return Ok(new { success = result, Message = "Note added" });
                 }
@@ -49,8 +46,8 @@ namespace EmployeeManagement.Controllers
         public IActionResult Display()
         {
             try {
-                string employeeId = this.GetEmpId();
-                var result = this.notesBL.Display(employeeId);
+                string accountID = this.GetAccountId();
+                var result = this.notesBL.Display(accountID);
                 if (!result.Equals(null)) {
                     return Ok(new { success = true, Message = "Note added", Data = result });
                 }
@@ -109,7 +106,7 @@ namespace EmployeeManagement.Controllers
             }
 
         }
-        private string GetEmpId()
+        private string GetAccountId()
         {
             return User.FindFirst("Id").Value;
         }

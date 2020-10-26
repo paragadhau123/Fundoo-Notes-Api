@@ -13,7 +13,7 @@ namespace CommonLayer.Model
     /// <summary>
     /// EmployeeDetails Class
     /// </summary>
-    public class EmployeeDetails
+    public class AccountsDetails
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

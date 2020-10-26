@@ -10,18 +10,18 @@ namespace RepositoryLayer.Interface
     using System.Text;
     using CommonLayer.Model;
 
-    public interface IEmployeeRL
+    public interface IAccountsRL
     {
-        List<Employee> GetEmployeeDetails();
+        List<Accounts> GetAccountsDetails();
 
-        bool AddEmployee(EmployeeDetails employee);
+        bool RegisterAccount(AccountsDetails accounts);
 
-        public bool DeleteEmployeeById(string id);
+        public bool DeleteAccountById(string id);
 
-        public bool EditEmployeeDetails(string id, Employee employee);
+        public bool UpdateAccountDetails(string id, Accounts accounts);
 
-        Employee Login(LoginModel model);
+        Accounts Login(LoginModel model);
         string ForgetPassword(ForgetPassword model);
-        bool ResetPassword( ResetPassword resetPassword, string employeeId);
+        bool ResetPassword( ResetPassword resetPassword, string accountId);
     }
 }

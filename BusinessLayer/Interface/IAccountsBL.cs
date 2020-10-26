@@ -11,18 +11,18 @@ namespace BusinessLayer.Interface
     using CommonLayer.Model;
     using RepositoryLayer;
 
-    public interface IEmployeeBL
+    public interface IAccountsBL
     {     
-        List<Employee> GetEmployeeDetails();
+        List<Accounts> GetAccountsDetails();
 
-        public bool AddEmployee(EmployeeDetails employee);
+        public bool RegisterAccount(AccountsDetails accounts);
 
-        public bool DeleteEmployeeById(string id);
+        public bool DeleteAccountById(string id);
 
-        public bool EditEmployeeDetails(string id, Employee employee);
+        public bool UpdateAccountDetails(string id, Accounts employee);
 
-        Employee Login(LoginModel model);
+        Accounts Login(LoginModel model);
         string ForgetPassword(ForgetPassword model);
-        bool ResetPassword( ResetPassword resetPassword,string employeeId);
+        bool ResetPassword( ResetPassword resetPassword,string accountId);
     }
 }

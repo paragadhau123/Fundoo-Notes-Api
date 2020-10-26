@@ -12,7 +12,7 @@ namespace RepositoryLayer
         [BsonRepresentation(BsonType.ObjectId)]
         public string NoteId { get; set; }
 
-        public string EmployeeId { get; set; }
+        public string AccountId { get; set; }
 
         public string Title { get; set; }
 
