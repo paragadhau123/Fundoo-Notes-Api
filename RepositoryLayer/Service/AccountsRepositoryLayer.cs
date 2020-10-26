@@ -33,7 +33,7 @@ namespace RepositoryLayer.Service
     {
         private readonly IMongoCollection<Accounts> _Account;
 
-        public AccountsRepositoryLayer(IEmployeeDatabaseSettings settings)
+        public AccountsRepositoryLayer(IFundooNotesDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);

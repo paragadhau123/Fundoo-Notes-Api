@@ -11,7 +11,7 @@ namespace RepositoryLayer.Service
     {
         private readonly IMongoCollection<Notes> _Note;
 
-        public NotesRL(IEmployeeDatabaseSettings settings)
+        public NotesRL(IFundooNotesDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);

@@ -8,7 +8,7 @@ namespace RepositoryLayer
     /// <summary>
     /// EmployeeDatabaseSettings Class 
     /// </summary>
-    public class EmployeeDatabaseSettings : IEmployeeDatabaseSettings
+    public class FundooNotesDatabaseSettings : IFundooNotesDatabaseSettings
     {
         public string ConnectionString { get; set; }
 
@@ -20,7 +20,7 @@ namespace RepositoryLayer
         public string NotesCollectionName { get; set; }
     }
 
-    public interface IEmployeeDatabaseSettings
+    public interface IFundooNotesDatabaseSettings
     {
         string ConnectionString { get; set; }
 

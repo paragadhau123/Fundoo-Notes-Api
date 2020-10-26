@@ -44,10 +44,10 @@ namespace EmployeeManagement
         {
           //  services.AddCors();
             services.AddControllers();
-            services.Configure<EmployeeDatabaseSettings>(
-               this.Configuration.GetSection(nameof(EmployeeDatabaseSettings)));
-            services.AddSingleton<IEmployeeDatabaseSettings>(sp =>
-              sp.GetRequiredService<IOptions<EmployeeDatabaseSettings>>().Value);
+            services.Configure<FundooNotesDatabaseSettings>(
+               this.Configuration.GetSection(nameof(FundooNotesDatabaseSettings)));
+            services.AddSingleton<IFundooNotesDatabaseSettings>(sp =>
+              sp.GetRequiredService<IOptions<FundooNotesDatabaseSettings>>().Value);
 
             services.AddSingleton<IAccountsBL, AccountsBusinessLayer>();
             services.AddSingleton<IAccountsRL, AccountsRepositoryLayer>();
