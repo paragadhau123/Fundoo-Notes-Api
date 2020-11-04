@@ -72,7 +72,7 @@ namespace EmployeeManagement.Controllers
                 {
                     string Token = businessLayer.ForgetPassword(model);
 
-                    var passwordResetLink = Url.Action("ResetPassword", "Employee",
+                    var passwordResetLink = Url.Action("ResetPassword", "Account",
                     new { email = model.Email, token = Token }, Request.Scheme);
 
                     MailMessage mailMessage = new MailMessage(model.Email, model.Email);

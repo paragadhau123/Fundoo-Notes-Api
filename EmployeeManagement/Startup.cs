@@ -32,6 +32,7 @@ namespace EmployeeManagement
     /// </summary>
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
            this.Configuration = configuration;
@@ -97,6 +98,16 @@ namespace EmployeeManagement
 
                 });
 
+                services.AddCors(options =>
+                {
+                    options.AddPolicy(name: MyAllowSpecificOrigins,
+                                      builder =>
+                                      {
+                                          builder.WithOrigins("http://example.com",
+                                                              "http://www.contoso.com");
+                                      });
+                });
+
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
@@ -135,18 +146,24 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
                 app.UseDeveloperExceptionPage();
             }
 
-          
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseRouting();
+           
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-            });
 
+                endpoints.MapControllers();
+
+            });
+           
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
