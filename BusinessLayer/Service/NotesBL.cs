@@ -31,9 +31,17 @@ namespace BusinessLayer.Service
             return this.notesRL.Display(accountID);
         }
 
-        public Notes EditNotes(string noteId, Notes note)
+        public bool EditNotes(string noteId, Notes note)
         {
             return this.notesRL.EditNotes(noteId, note);
+        }
+        public bool IsTrash(string id)
+        {
+            return this.notesRL.IsTrash(id);
+        }
+        public bool IsArchive(string id)
+        {
+            return this.notesRL.IsArchive(id);
         }
     }
 }

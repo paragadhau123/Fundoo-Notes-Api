@@ -62,20 +62,20 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { success, message = e.Message });
             }
 }
-        [HttpPut("{noteid:length(24)}")]
+        [HttpPut("{noteId:length(24)}")]
         public IActionResult EditNotes(string noteId,Notes note)
         {
             try
             {
-                Notes result = this.notesBL.EditNotes(noteId, note);
-                if (!result.Equals(false)) 
+                bool result = this.notesBL.EditNotes(noteId, note);
+                if (result==true) 
                 {
-                    return Ok(new { success = result, Message = "Note is updated successfully" });
+                    return this.Ok(new { success = result, Message = "Note is updated successfully" });
 
                 }
                 else
                 {
-                    return NotFound(new { success = result, Message = "Note is not updated successfully" });
+                    return this.NotFound(new { success = result, Message = "Note is not updated successfully" });
                 }
             }catch(Exception e)
             {
@@ -104,7 +104,41 @@ namespace EmployeeManagement.Controllers
                 bool success = false;
                 return this.BadRequest(new { success, message = e.Message });
             }
+        }
+        [HttpPost("{noteId:length(24)}")]
+        public IActionResult IsTrash(string noteId)
+        {
+            try
+            {
 
+                var result = this.notesBL.IsTrash(noteId);
+                if (result == true)
+                    return this.Ok(new { sucess = true, message = "Successfully Trashed notes" });
+                else
+                    return this.BadRequest(new { success = false, meaasage = " notes dosn't trashed Successfully" });
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(new { sucess = false, message = e.Message });
+            }
+        }
+
+        [HttpPost("ArchiveNotes")]
+        public IActionResult IsArchive(string noteId)
+        {
+            try
+            {
+
+                var result = this.notesBL.IsArchive(noteId);
+                if (result == true)
+                    return this.Ok(new { sucess = true, message = "Successfully Trashed notes" });
+                else
+                    return this.BadRequest(new { success = false, meaasage = " notes dosn't trashed Successfully" });
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(new { sucess = false, message = e.Message });
+            }
         }
         private string GetAccountId()
         {

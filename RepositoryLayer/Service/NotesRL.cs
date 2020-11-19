@@ -20,7 +20,8 @@ namespace RepositoryLayer.Service
 
         public Notes AddNotes(NotesModel addNotesModel, string accountID)
         {
-            try {
+            try
+            {
                 Notes note = new Notes()
                 {
                     Title = addNotesModel.Title,
@@ -30,12 +31,12 @@ namespace RepositoryLayer.Service
                     Color = addNotesModel.Color,
                     IsPin = addNotesModel.IsPin,
                     IsArchive = addNotesModel.IsArchive,
-                    IsTrash=addNotesModel.IsTrash
+                    IsTrash = addNotesModel.IsTrash
                 };
                 this._Note.InsertOne(note);
                 return note;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -59,21 +60,75 @@ namespace RepositoryLayer.Service
             return this._Note.Find(note => note.AccountId == accountID).ToList();
         }
 
-        public Notes EditNotes(string noteId, Notes note)
+        public bool EditNotes(string noteId, Notes note)
         {
             try
             {
                 this._Note.ReplaceOne(note => note.NoteId == noteId, note);
-                return note;
+                return true;
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
-                return null;
+                return false;
             }
-           
+
+        }
+        public bool IsTrash(string id)
+        {
+            try
+            {
+                List<Notes> list = this._Note.Find(notes => notes.NoteId == id).ToList();
+
+                if (list[0].IsTrash == true)
+                {
+                    var filter = Builders<Notes>.Filter.Eq("NoteId", id);
+                    var update = Builders<Notes>.Update.Set("IsTrash", false);
+                    _Note.UpdateOne(filter, update);
+                    return true;
+                }
+
+                else
+                {
+                    var filter = Builders<Notes>.Filter.Eq("NoteId", id);
+                    var update = Builders<Notes>.Update.Set("IsTrash", true);
+                    _Note.UpdateOne(filter, update);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-       
-        
+        public bool IsArchive(string id)
+        {
+            try
+            {
+                List<Notes> list = this._Note.Find(notes => notes.NoteId == id).ToList();
+
+                if (list[0].IsArchive == true)
+                {
+                    var filter = Builders<Notes>.Filter.Eq("NoteId", id);
+                    var update = Builders<Notes>.Update.Set("IsArchive", false);
+                    _Note.UpdateOne(filter, update);
+                    return true;
+                }
+
+                else
+                {
+                    var filter = Builders<Notes>.Filter.Eq("NoteId", id);
+                    var update = Builders<Notes>.Update.Set("IsArchive", true);
+                    _Note.UpdateOne(filter, update);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
+    
 }

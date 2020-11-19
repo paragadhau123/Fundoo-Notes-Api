@@ -72,13 +72,13 @@ namespace EmployeeManagement.Controllers
                 {
                     string Token = businessLayer.ForgetPassword(model);
 
-                    var passwordResetLink = Url.Action("ResetPassword", "Accounts",
-                    new { email = model.Email, token = Token }, Request.Scheme);
+                    /*var passwordResetLink = Url.Action("resetPassword","/",
+                    new {token = Token }, Request.Scheme,"4200");*/
+                    String body = "http://localhost:4200/resetPassword/" + Token;
 
                     MailMessage mailMessage = new MailMessage(model.Email, model.Email);
-
                     mailMessage.Subject = "reset password";
-                    mailMessage.Body = passwordResetLink;
+                    mailMessage.Body = body;
                     SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                     smtpClient.UseDefaultCredentials = false;
                     smtpClient.Credentials = new NetworkCredential()
